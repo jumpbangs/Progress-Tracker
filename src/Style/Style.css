@@ -1,0 +1,88 @@
+/*
+    Login
+ */
+
+.login-block {
+    background: #DE6262;
+    background: linear-gradient(to bottom, #FFB88C, #DE6262);
+    height: 100vh;
+    overflow: hidden;
+    padding: 50px 0;
+}
+
+
+.block__container {
+    background:#fff;
+    border-radius: 10px;
+    box-shadow:15px 20px 0px rgba(0,0,0,0.1);
+}
+
+.block__section h2{
+    text-align: center;
+}
+
+.block__section h2:after{
+    content:" ";
+    width:100px;
+    height:5px;
+    background:#FEB58A;
+    display:block;
+    margin-top:20px;
+    border-radius:3px;
+    margin-left:auto;
+    margin-right:auto
+}
+
+.block__section {
+    padding: 50px 30px;
+}
+
+.login-form {
+    padding: 10px;
+}
+
+.btn-login {
+    float: right;
+    font-weight:600;
+}
+
+.login-block-side {
+    background-color: #2F2D2E;
+    border-radius: 0 10px 10px 0;
+}
+
+.login-block-side{
+    text-align: center;
+}
+
+.login-block-side__img-block{
+    padding: 50px 0;
+}
+.img-block{
+    width: 120px;
+    height: 120px;
+}
+
+.login-block-side__title-block h4{
+    color: whitesmoke;
+    font-size: 25px;
+}
+
+/*
+    Register Block
+ */
+
+.register-block{
+    background: #DE6262;
+    background: linear-gradient(to bottom, #FFB88C, #DE6262);
+    height: 100vh;
+    overflow: hidden;
+    padding: 50px 0;
+}
+
+.register-form {
+    padding: 20px 0;
+    margin: 20px;
+    margin: 0 auto;
+    text-align: center;
+}
