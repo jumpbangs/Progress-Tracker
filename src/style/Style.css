@@ -6,7 +6,7 @@
     background: #DE6262;
     background: linear-gradient(to bottom, #FFB88C, #DE6262);
     height: 100vh;
-    overflow: hidden;
+    overflow: auto;
     padding: 50px 0;
 }
 
@@ -17,7 +17,7 @@
     box-shadow:15px 20px 0px rgba(0,0,0,0.1);
 }
 
-.block__section h2{
+.block__section h2, p{
     text-align: center;
 }
 
@@ -76,13 +76,20 @@
     background: #DE6262;
     background: linear-gradient(to bottom, #FFB88C, #DE6262);
     height: 100vh;
-    overflow: hidden;
-    padding: 50px 0;
+    overflow: auto;
+    padding: 60px 0;
 }
 
 .register-form {
-    padding: 20px 0;
-    margin: 20px;
-    margin: 0 auto;
+    padding: 30px 0;
     text-align: center;
+}
+
+/*.form-group input{*/
+/*    padding: 7px 10px;*/
+/*}*/
+
+.form-group input::placeholder{
+    opacity: 0.5;
+    text-align: left;
 }
