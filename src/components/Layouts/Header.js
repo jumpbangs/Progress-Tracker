@@ -11,7 +11,6 @@ class Header extends Component {
 
 
     render() {
-        console.log(this.props);
         return (
             <div>
                 <nav className='navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow'>

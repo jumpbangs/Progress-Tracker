@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 import AxiosApi from '../utils/axios.config';
-import Etc from '../utils/etc';
 
 const initialState = {
     name: '',
@@ -38,16 +37,14 @@ class RegisterComponent extends Component {
 
         AxiosApi.post('auth/register', registerDetails)
             .then(response => {
-                let res = Etc.convertToString(response);
                 this.props.history.push('/');
-                alert(res.data.msg);
+                alert(response.data.msg);
             })
             .catch(error => {
-                let err = Etc.convertToString(error);
-                console.log(err.message);
                 if (error) {
-                    alert(err);
+                    alert(error.response.data.err.msg);
                 }
+                this.setState(initialState);
             })
 
 
@@ -91,7 +88,7 @@ class RegisterComponent extends Component {
                                 <div className='form-group'>
                                     <input
                                         className='form-control'
-                                        type='text'
+                                        type='email'
                                         name='email'
                                         placeholder='email'
                                         onChange={this.onChange}

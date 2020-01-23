@@ -39,7 +39,6 @@ function withLoginCheck(Component) {
 class App extends Component {
 
     render() {
-        console.log(isLoggedIn());
         return (
             <Router>
                 <Switch>

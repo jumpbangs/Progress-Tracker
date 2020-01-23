@@ -10,6 +10,6 @@ export default function authReducer(state=[], action) {
     //     default:
     //         return state;
     // }
-    console.log(action);
+    // console.log(action);
 
 }
