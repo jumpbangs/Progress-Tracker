@@ -11,10 +11,11 @@ import {
 } from "react-router-dom";
 
 const initialState = {
-    username : '',
-    password : '',
-    userErr : ' ',
-    passErr : ' ',
+    username: '',
+    password: '',
+    userErr: ' ',
+    passErr: ' ',
+
 };
 
 class LoginComponent extends Component {
@@ -27,40 +28,37 @@ class LoginComponent extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onChange = (event)=>{
-        this.setState({[event.target.name] : event.target.value});
+    onChange = (event) => {
+        this.setState({[event.target.name]: event.target.value});
     };
 
-    validator = () =>{
+    validator = () => {
         let userErr = '';
         let passErr = '';
 
-        if(_.isEmpty(this.state.username)){
+        if (_.isEmpty(this.state.username)) {
             userErr = 'Username is empty'
-        }
-        else if(_.isEmpty(this.state.password)){
+        } else if (_.isEmpty(this.state.password)) {
             passErr = 'Password is empty'
         }
 
-        if(userErr){
+        if (userErr) {
             this.setState({
                 userErr
             });
             return false;
-        }
-        else if (passErr){
+        } else if (passErr) {
             this.setState({
                 passErr
             });
 
             return false;
         }
-
         return true;
 
     };
 
-    onSubmit = (event) =>{
+    onSubmit = (event) => {
         event.preventDefault();
 
         const isValid = this.validator();
@@ -70,28 +68,26 @@ class LoginComponent extends Component {
         };
 
 
-        if(isValid){
+        if (isValid) {
             AxiosApi.post('auth/login', details)
-                .then(response =>{
+                .then(response => {
                     let res = Etc.convertToString(response);
-                    console.log(res);
+                    localStorage.setItem('userToken', res.data.token);
+                    localStorage.setItem('auth', res.data.auth);
                     this.props.history.push('/home');
                 })
-                .catch(error =>{
-                    if(error){
+                .catch(error => {
+                    if (error) {
                         alert('Sorry your login details are not correct');
                     }
                 });
             this.setState(initialState);
         }
 
-
     };
 
 
-
     render() {
-        console.log(this.props);
         return (
             <div className='login-block'>
 
@@ -125,8 +121,9 @@ class LoginComponent extends Component {
                                     />
                                 </div>
                                 <div className='form-group'>
-                                    <button type='submit'  className='btn btn-danger form-control btn-login'> Login</button>
-                                    <Link to='/register' >
+                                    <button type='submit' className='btn btn-danger form-control btn-login'> Login
+                                    </button>
+                                    <Link to='/register'>
                                         Create a new account
                                     </Link>
                                 </div>

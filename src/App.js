@@ -9,7 +9,7 @@ import './style/Reset.css';
 import {
 	BrowserRouter as Router,
 	Switch,
-	Route
+	Route, Redirect
 } from "react-router-dom";
 
 // Bootstrap
@@ -19,14 +19,28 @@ import LoginComponent from "./components/Login.Component";
 import RegisterComponent from "./components/Register.Component";
 import HomeComponent from "./components/Home.Component";
 
+const isLoggedIn = () =>{
+	return localStorage.getItem('userToken');
+};
+
+const EnhancedRoute = (Component) =>{
+	return (props)=>{
+			if(isLoggedIn())
+				return (<Component {...props}/>);
+			else
+				return (<Redirect to='/'/>);
+	}
+};
 class App extends Component{
+
 	render() {
+		console.log(isLoggedIn());
 		return(
 			<Router>
 				<Switch>
 					<Route exact from='/' to='login' component={LoginComponent} />
 					<Route exact path='/register' component={RegisterComponent}/>
-					<Route exact path='/home' component={HomeComponent}/>
+					<Route exact path='/home' component={EnhancedRoute(HomeComponent)}/>
 				</Switch>
 			</Router>
 		)}
