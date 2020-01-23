@@ -1,19 +1,27 @@
 import React, {Component} from 'react';
 
 //Logo
-import logo from '../../assets/img/logo.png';
+import logo from '../assets/img/logo.png';
 
-import AxiosApi from '../../api/axios.config';
-import {Link} from "react-router-dom";
+import _ from 'lodash';
+import AxiosApi from '../utils/axios.config';
+import Etc from '../utils/etc';
+import {
+    Link,
+} from "react-router-dom";
 
-class Login extends Component {
+const initialState = {
+    username : '',
+    password : '',
+    userErr : ' ',
+    passErr : ' ',
+};
+
+class LoginComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            username : '',
-            password : ''
-        };
+        this.state = initialState;
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -23,28 +31,67 @@ class Login extends Component {
         this.setState({[event.target.name] : event.target.value});
     };
 
+    validator = () =>{
+        let userErr = '';
+        let passErr = '';
+
+        if(_.isEmpty(this.state.username)){
+            userErr = 'Username is empty'
+        }
+        else if(_.isEmpty(this.state.password)){
+            passErr = 'Password is empty'
+        }
+
+        if(userErr){
+            this.setState({
+                userErr
+            });
+            return false;
+        }
+        else if (passErr){
+            this.setState({
+                passErr
+            });
+
+            return false;
+        }
+
+        return true;
+
+    };
+
     onSubmit = (event) =>{
         event.preventDefault();
 
+        const isValid = this.validator();
         const details = {
             UserName: this.state.username,
             Password: this.state.password
         };
 
-        AxiosApi.post('auth/login', details)
-            .then(response =>{
-                alert("Welcome");
-            })
-            .catch(error =>{
-                if(error){
-                    alert('Sorry your login details are not correct');
-                }
-            });
+
+        if(isValid){
+            AxiosApi.post('auth/login', details)
+                .then(response =>{
+                    let res = Etc.convertToString(response);
+                    console.log(res);
+                    this.props.history.push('/home');
+                })
+                .catch(error =>{
+                    if(error){
+                        alert('Sorry your login details are not correct');
+                    }
+                });
+            this.setState(initialState);
+        }
+
+
     };
 
 
 
     render() {
+        console.log(this.props);
         return (
             <div className='login-block'>
 
@@ -62,9 +109,10 @@ class Login extends Component {
                                         name='username'
                                         onChange={this.onChange}
                                         value={this.state.username}
-
+                                        required
                                     />
                                 </div>
+
                                 <div className='form-group'>
                                     <input
                                         className='form-control'
@@ -73,6 +121,7 @@ class Login extends Component {
                                         name='password'
                                         onChange={this.onChange}
                                         value={this.state.password}
+                                        required
                                     />
                                 </div>
                                 <div className='form-group'>
@@ -104,4 +153,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default LoginComponent;

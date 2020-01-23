@@ -1,45 +1,52 @@
 import React, {Component} from 'react';
 
-import AxiosApi from '../../api/axios.config';
+import AxiosApi from '../utils/axios.config';
+import Etc from '../utils/etc';
 
-class Register extends Component{
+const initialState = {
+    name: '',
+    username: '',
+    password: '',
+    email: '',
+}
+
+
+class RegisterComponent extends Component {
     constructor(props) {
         super(props);
-        this.state ={
-            name:'',
-            username: '',
-            password:'',
-            email:'',
-        };
+        this.state = initialState;
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this)
-    }
+    };
 
-    onChange = (event) =>{
+    onChange = (event) => {
         this.setState({
-            [event.target.name] : event.target.value
+            [event.target.name]: event.target.value
         });
     };
 
-    onSubmit = (event) =>{
+    onSubmit = (event) => {
         event.preventDefault();
 
         const registerDetails = {
             UserName: this.state.username,
             Name: this.state.name,
             Password: this.state.password,
-            Email : this.state.email,
+            Email: this.state.email,
         };
 
         AxiosApi.post('auth/register', registerDetails)
-            .then(response =>{
+            .then(response => {
+                let res = Etc.convertToString(response);
                 this.props.history.push('/');
-                alert('User Registered')
+                alert(res.data.msg);
             })
-            .catch(err => {
-                if(err){
-                    alert('Sorry an error has be found')
+            .catch(error => {
+                let err = Etc.convertToString(error);
+                console.log(err.message);
+                if (error) {
+                    alert(err);
                 }
             })
 
@@ -47,10 +54,8 @@ class Register extends Component{
     };
 
 
-
     render() {
-        console.log(this.props);
-        return(
+        return (
             <div className='register-block'>
 
                 <div className='container block__container'>
@@ -124,4 +129,4 @@ class Register extends Component{
 
 }
 
-export default Register;
+export default RegisterComponent;

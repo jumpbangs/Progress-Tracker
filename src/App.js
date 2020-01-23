@@ -15,16 +15,18 @@ import {
 // Bootstrap
 import './style/bootstrap.min.css';
 
-import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
+import LoginComponent from "./components/Login.Component";
+import RegisterComponent from "./components/Register.Component";
+import HomeComponent from "./components/Home.Component";
 
 class App extends Component{
 	render() {
 		return(
 			<Router>
 				<Switch>
-					<Route exact from='/' to='login' component={Login} />
-					<Route exact path='/register' component={Register}/>
+					<Route exact from='/' to='login' component={LoginComponent} />
+					<Route exact path='/register' component={RegisterComponent}/>
+					<Route exact path='/home' component={HomeComponent}/>
 				</Switch>
 			</Router>
 		)}
