@@ -85,11 +85,12 @@
     text-align: center;
 }
 
-/*.form-group input{*/
-/*    padding: 7px 10px;*/
-/*}*/
-
 .form-group input::placeholder{
     opacity: 0.5;
     text-align: left;
 }
+
+
+/*
+    Nav Bar
+ */
