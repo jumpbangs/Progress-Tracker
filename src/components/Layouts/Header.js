@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class Header extends Component {
 
-    onSignOut = (event) =>{
+    onSignOut = (event) => {
         event.preventDefault();
         localStorage.removeItem('userToken');
         localStorage.removeItem('auth');
@@ -13,13 +13,18 @@ class Header extends Component {
     render() {
         return (
             <div>
-                <nav className='navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow'>
-                    <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
-                    <ul className="navbar-nav px-3">
-                        <li className="nav-item text-nowrap">
-                            <a onClick={this.onSignOut} className="nav-link">Sign Out</a>
-                        </li>
-                    </ul>
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div className="container-fluid">
+
+                        <a className="navbar-brand" href="#">WebSiteName</a>
+
+                        <div className="nav navbar-nav navbar-right">
+                            <a onClick={this.onSignOut} className='nav-item nav-link sign-out'>
+                                <i className="fas fa-sign-out-alt" />
+                                Login
+                            </a>
+                        </div>
+                    </div>
                 </nav>
             </div>
         );

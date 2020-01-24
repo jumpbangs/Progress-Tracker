@@ -94,3 +94,19 @@
 /*
     Nav Bar
  */
+.sign-out {
+    cursor: pointer;
+}
+
+.nav-right {
+    float: right;
+}
+
+.nav-icon {
+    padding: 5px 0;
+}
+
+.nav-icon i{
+    padding: 5px;
+}
+

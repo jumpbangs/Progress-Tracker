@@ -7,8 +7,10 @@ class HomeComponent extends Component {
         return (
             <div>
                 <Header {...this.props}/>
-                <div className='container-fluid'>
-                    <Sidebar />
+                <Sidebar />
+
+                <div className='main-body'>
+
                 </div>
             </div>
         );
