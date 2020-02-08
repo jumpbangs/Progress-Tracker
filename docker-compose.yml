@@ -5,12 +5,12 @@ services:
     container_name: nodeserverCon
     env_file:
       - ./api/.env
-    build:
-      context: ./api
+    build: ./api
     ports:
     - "8080:5000"
     volumes:
-      - ./api:/backend
+      - ./api:/backend/
+      - /backend/node_modules
 
 
 
