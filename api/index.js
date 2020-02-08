@@ -31,14 +31,14 @@ APP.use(function (req, res, next) {
     // res.end('you are blocked at middleware');
     next({
         status: 404,
-        msg: 'Application Level Error'
+        msg: 'Application Level Error ??'
     });
 });
 
 
 //Error Handling
 APP.use((err, req, res, next) => {
-    console.log('i am error handling middleware');
+    console.log('i am error handling middleware dwadwa');
     console.log(err );
     res.status(err.status || 404).json({
         msg: 'from error handling middleware',

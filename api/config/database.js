@@ -3,8 +3,8 @@ const dotEnv = require('dotenv').config().parsed;
 let databaseType;
 const databaseConfig ={
     dev :{
-        host: 'localhost',
-        admin: 'chong',
+        host: '172.17.0.1',
+        admin: 'root',
         password: 'password',
         database: 'le_database',
         dialect: 'mysql'
@@ -27,14 +27,18 @@ const databaseConfig ={
 
 };
 
+console.log('Running');
+console.log(dotEnv.NODE_ENV_MODE);
+console.log('Running end');
+
 if ( dotEnv.NODE_ENV_MODE ===  'dev'){
     databaseType = databaseConfig.dev;
 }
-else if (dotEnv.NODE_ENV_MODE ===  'vm'){
-    databaseType = databaseConfig.vm;
-}
+// else if (dotEnv.NODE_ENV_MODE ===  'vm'){
+//     databaseType = databaseConfig.vm;
+// }
 else{
-    databaseType = databaseConfig.prod;
+    databaseType = databaseConfig.vm;
 }
 
 module.exports = databaseType;

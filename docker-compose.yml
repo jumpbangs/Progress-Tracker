@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  backend:
+    image: nodeserver
+    container_name: nodeserverCon
+    env_file:
+      - ./api/.env
+    build:
+      context: ./api
+    ports:
+    - "8080:5000"
+    volumes:
+      - ./api:/backend
+
+
+
+  frontend:
+    container_name: progresstrackerCon
+    image: progresstracker
+    build: ./app
+    ports:
+    - "8888:80"
+
+#volumes:
+#  lol:

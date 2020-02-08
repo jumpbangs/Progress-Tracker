@@ -1,5 +1,6 @@
 FROM node:13
-COPY package.json ./
+WORKDIR /backend
+COPY package.json .
 RUN npm install
 COPY . .
 EXPOSE 5000
