@@ -95,7 +95,7 @@ class LoginComponent extends Component {
                     <div className='row'>
 
                         <div className='col-md-4 block__section'>
-                            <h2>Login</h2>
+                            <h2>Hi</h2>
                             <form onSubmit={this.onSubmit} className='login-form'>
                                 <div className='form-group'>
                                     <input

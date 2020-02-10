@@ -1,5 +1,23 @@
 version: '3.7'
 services:
+  mysql-db:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+    - ./mysql-dump:/docker-entrypoint-initdb.d
+    container_name: progressdb
+    ports:
+      - '3306:3306'
+    expose:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 'passsword'
+      MYSQL_DATABASE: 'le_database'
+      MYSQL_USER: 'chong'
+      MYSQL_PASSWORD: 'password'
+
+
   backend:
     image: nodeserver
     container_name: nodeserverCon
@@ -12,8 +30,6 @@ services:
       - ./api:/backend/
       - /backend/node_modules
 
-
-
   frontend:
     container_name: progresstrackerCon
     image: progresstracker
@@ -21,5 +37,3 @@ services:
     ports:
     - "8888:80"
 
-#volumes:
-#  lol:

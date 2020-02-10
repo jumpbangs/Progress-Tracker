@@ -65,6 +65,6 @@ let UserProfile = mysqlDb.define('userProfile', {
 /**
  * create table if not exist
  */
-mysqlDb.sync({force:true});
+mysqlDb.sync({force:false});
 
 module.exports = {User, UserProfile};

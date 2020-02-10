@@ -10,7 +10,7 @@ const databaseConfig ={
         dialect: 'mysql'
     },
     vm :{
-        host: '172.17.0.1',
+        host: 'mysql-db',
         admin: 'chong',
         password: 'password',
         database: 'le_database',
