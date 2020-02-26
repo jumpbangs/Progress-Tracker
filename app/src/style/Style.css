@@ -1,15 +1,10 @@
 /*
-    LoginComponent
- */
-
-.login-block {
+    Default background
+*/
+.default-bg {
     background: #DE6262;
     background: linear-gradient(to bottom, #FFB88C, #DE6262);
-    height: 100vh;
-    overflow: auto;
-    padding: 50px 0;
 }
-
 
 .block__container {
     background:#fff;
@@ -35,6 +30,16 @@
 
 .block__section {
     padding: 50px 30px;
+}
+
+/*
+    LoginComponent
+ */
+
+.login-block {
+    height: 100vh;
+    overflow: auto;
+    padding: 50px 0;
 }
 
 .login-form {
@@ -73,8 +78,6 @@
  */
 
 .register-block{
-    background: #DE6262;
-    background: linear-gradient(to bottom, #FFB88C, #DE6262);
     height: 100vh;
     overflow: auto;
     padding: 60px 0;
@@ -110,3 +113,14 @@
     padding: 5px;
 }
 
+
+
+/*
+    Forget Pass Page
+*/
+
+.forgetpass-block{
+    height: 100vh;
+    overflow: auto;
+    padding: 60px 0;
+}

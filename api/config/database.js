@@ -23,6 +23,13 @@ const databaseConfig ={
         database: 'le_database',
         dialect: 'mysql'
     },
+    local :{
+        host: 'localhost',
+        admin: 'chong',
+        password: 'password',
+        database:'le_database',
+        dialect:'mysql'
+    }
 
 
 };
@@ -34,9 +41,9 @@ console.log('Running end');
 if ( dotEnv.NODE_ENV_MODE ===  'dev'){
     databaseType = databaseConfig.dev;
 }
-// else if (dotEnv.NODE_ENV_MODE ===  'vm'){
-//     databaseType = databaseConfig.vm;
-// }
+else if (dotEnv.NODE_ENV_MODE ===  'local'){
+    databaseType = databaseConfig.local;
+}
 else{
     databaseType = databaseConfig.vm;
 }

@@ -18,6 +18,7 @@ import './style/bootstrap.min.css';
 import LoginComponent from "./components/Login.Component";
 import RegisterComponent from "./components/Register.Component";
 import HomeComponent from "./components/Home.Component";
+import  ForgetPassComponent  from './components/ForgetPass.Component';
 
 const isLoggedIn = () => {
     return localStorage.getItem('userToken');
@@ -43,6 +44,7 @@ class App extends Component {
             <Router>
                 <Switch>
                     <Route exact from='/' to='login' component={LoginComponent}/>
+                    <Route exact path='/forgetpass' component={ForgetPassComponent}/>>
                     <Route exact path='/register' component={RegisterComponent}/>
                     <Route exact path='/home' component={EnhancedRoute}/>
                 </Switch>

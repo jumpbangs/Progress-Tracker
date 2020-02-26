@@ -82,6 +82,12 @@ class AuthController {
         }
 
     };
+
+    resetPassword = (request, response, next) => {
+
+    }
+
+    
 }
 
 
