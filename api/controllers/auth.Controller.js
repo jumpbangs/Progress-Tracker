@@ -7,7 +7,7 @@ class AuthController {
 
     authBase = (request, response, next) => {
         response.json({
-            msg: 'form empty route'
+            msg: 'form auth route'
         })
     };
 
@@ -82,10 +82,6 @@ class AuthController {
         }
 
     };
-
-    resetPassword = (request, response, next) => {
-
-    }
 
     
 }

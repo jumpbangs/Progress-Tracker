@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import AxiosApi from "../utils/axios.config";
+
 
 export class ForgetPassComponent extends Component {
   constructor(props) {
@@ -20,12 +22,26 @@ export class ForgetPassComponent extends Component {
   };
 
   onSubmit = event => {
-    event.preventDefautl();
+    event.preventDefault();
 
     const emailDetails = {
         Email:this.state.email
-    }
-
+    };
+    console.log("send email");
+    AxiosApi.post("user/resetpass", emailDetails)
+      .then(response =>{
+        this.props.history.push("/");
+        alert(response.data.msg);
+      })
+      .catch(error =>{
+        if(error){
+          alert(error.response.data.err.msg);
+        }
+        this.setState({
+          email:''
+        })
+      });
+    
   };
 
   render() {
@@ -63,11 +79,5 @@ export class ForgetPassComponent extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
 
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ForgetPassComponent);
+export default ForgetPassComponent;

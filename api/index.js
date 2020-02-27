@@ -1,5 +1,5 @@
 // Port Settings
-const PORT = 5000;
+const PORT = 8080;
 const HOST = '0.0.0.0';
 
 // Import/Required
@@ -22,8 +22,10 @@ APP.use(EXPRESS.urlencoded({
 APP.use(EXPRESS.json());
 
 const AUTHROUTE = require('./route/auth.Route');
+const USERROUTE = require('./route/user.Route');
 
 APP.use('/auth', AUTHROUTE);
+APP.use('/user', USERROUTE);
 
 
 //Application Level
@@ -38,8 +40,6 @@ APP.use(function (req, res, next) {
 
 //Error Handling
 APP.use((err, req, res, next) => {
-    console.log('i am error handling middleware dwadwa');
-    console.log(err );
     res.status(err.status || 404).json({
         msg: 'from error handling middleware',
         err: err
