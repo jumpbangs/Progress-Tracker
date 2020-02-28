@@ -1,42 +1,36 @@
-import axios from 'axios';
+import AxiosApi from "../utils/axios.config";
+import Etc from "../utils/etc";
 
-export const TEST_URL = 'TEST_URL';
-export const LOGIN_USER = 'LOGIN_USER';
-export const REGISTER_USER = 'REGISTER_USER';
+export const LOGIN_USER = "LOGIN_USER";
+export const REGISTER_USER = "REGISTER_USER";
 
-const API_URL = 'http://localhost:8080';
+// export const loginUser = data => {
+//   return dispatch => {
+//     return AxiosApi.post("/auth/login", data)
+//       .then(response => {
+//         let res = Etc.convertToString(response);
+//         localStorage.setItem("userToken", res.data.token);
+//         localStorage.setItem("auth", res.data.auth);
+//         // history.push("/home");
+//       })
+//       .catch(error => {
+//         throw error;
+//       });
+//   };
+// };
 
-export function testApi() {
-    return axios.post(API_URL+'/test/')
-        .then((response)=>{
-            return response;
-        }).catch((err)=>{
-            return err;
-        });
-}
-
-export function checkDB() {
-    return (dispatch) =>{
-        dispatch(attemptCheckDb());
-        return testApi()
-            .then((data)=>{
-                return dispatch(testDbSuccess(data));
-            })
-            .catch((err)=>{
-                return dispatch(testDbSuccess(err));
-            })
+export const loginUser = (data, history) => {
+  return async dispatch => {
+    try {
+      const res = await AxiosApi.post("/auth/login", data);
+      localStorage.setItem("userToken", res.data.token);
+      localStorage.setItem("auth", res.data.auth);
+      history.push("/home");
+    } catch(error){
+        dispatch({
+            type:'authentication_error',
+            payload:error
+        })
     }
-
-     function attemptCheckDb(){
-        return {
-            type: TEST_URL
-        }
-    }
-}
-
-export function testDbSuccess(payload) {
-    return {
-        payload : payload
-    }
-
-}
+  };
+};
