@@ -3,7 +3,7 @@ import React, { Component } from "react";
 //Logo
 import logo from "../assets/img/logo.png";
 
-import _ from "lodash";
+import etc from '../utils/etc'
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -52,25 +52,12 @@ class LoginComponent extends Component {
   };
 
   validator = () => {
-    let userErr = "";
-    let passErr = "";
 
-    if (_.isEmpty(this.state.username)) {
-      userErr = "Username is empty";
-    } else if (_.isEmpty(this.state.password)) {
-      passErr = "Password is empty";
-    }
-
-    if (userErr) {
-      this.setState({
-        userErr
-      });
+    if (etc.isObjEmpty(this.state.username)) {
+      alert("Username is empty");
       return false;
-    } else if (passErr) {
-      this.setState({
-        passErr
-      });
-
+    } else if (etc.isObjEmpty(this.state.password)) {
+      alert("Password is empty");
       return false;
     }
     return true;
@@ -85,7 +72,9 @@ class LoginComponent extends Component {
       Password: this.state.password
     };
 
+    console.log(isValid);
     if (isValid) {
+      console.log('lol');
       this.props.loginUser(details, this.props.history);
       this.setState(initialState);
     }

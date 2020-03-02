@@ -1,6 +1,5 @@
 import {
     AUTH_ERR_LOGIN,
-    AUTH_LOGIN
 } from "../actions/auth.Actions";
 
 export default function authReducer(state=[], action) {

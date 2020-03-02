@@ -1,5 +1,4 @@
 import AxiosApi from "../utils/axios.config";
-import Etc from "../utils/etc";
 
 export const AUTH_ERR_LOGIN = "AUTH_ERR_LOGIN";
 
@@ -19,3 +18,5 @@ export const loginUser = (data, history) => {
     }
   };
 };
+
+
