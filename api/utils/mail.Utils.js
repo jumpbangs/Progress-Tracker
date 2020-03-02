@@ -13,8 +13,8 @@ class Mailer {
             secure: false,
 
             auth:{
-                user: 'logan.schuster@ethereal.email',
-                pass: 'Tj1dCXVxW4jKgrG8Hy'
+                user: 'angelica.boehm68@ethereal.email',
+                pass: 'DaGnxQZvRfZsQ4NQgY'
             }
         });
 

@@ -1,23 +1,8 @@
 import AxiosApi from "../utils/axios.config";
 import Etc from "../utils/etc";
 
-export const LOGIN_USER = "LOGIN_USER";
-export const REGISTER_USER = "REGISTER_USER";
+export const AUTH_ERR_LOGIN = "AUTH_ERR_LOGIN";
 
-// export const loginUser = data => {
-//   return dispatch => {
-//     return AxiosApi.post("/auth/login", data)
-//       .then(response => {
-//         let res = Etc.convertToString(response);
-//         localStorage.setItem("userToken", res.data.token);
-//         localStorage.setItem("auth", res.data.auth);
-//         // history.push("/home");
-//       })
-//       .catch(error => {
-//         throw error;
-//       });
-//   };
-// };
 
 export const loginUser = (data, history) => {
   return async dispatch => {
@@ -28,9 +13,9 @@ export const loginUser = (data, history) => {
       history.push("/home");
     } catch(error){
         dispatch({
-            type:'authentication_error',
-            payload:error
-        })
+            type: AUTH_ERR_LOGIN,
+            payload: error.response.data
+        });
     }
   };
 };

@@ -4,37 +4,47 @@ import React, { Component } from "react";
 import logo from "../assets/img/logo.png";
 
 import _ from "lodash";
-import AxiosApi from "../utils/axios.config";
-import Etc from "../utils/etc";
 import { Link } from "react-router-dom";
 
-import { connect } from 'react-redux'
-import { loginUser } from '../actions/auth.Actions'
+import { connect } from "react-redux";
+import { loginUser } from "../actions/auth.Actions";
 
 const initialState = {
   username: "",
   password: "",
   userErr: " ",
-  passErr: " "
+  passErr: " ",
+  authFailed: null
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-      loginUser : (data, history) => {
-          dispatch(loginUser(data, history))
-      }
+    loginUser: (data, history) => {
+      dispatch(loginUser(data, history));
+    }
   };
 };
 
-
 class LoginComponent extends Component {
-  
   constructor(props) {
     super(props);
-    this.state = initialState;
-
+    this.state = {
+      username: "",
+      password: "",
+      userErr: " ",
+      passErr: " ",
+      authFailed: this.props.errorMsg
+    };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidUpdate() {
+    let errArray = this.props.errorMsg.auth;
+    if(Object.keys(errArray).length > 0){
+      alert(errArray[0].err.msg)
+    }
+
   }
 
   onChange = event => {
@@ -76,24 +86,12 @@ class LoginComponent extends Component {
     };
 
     if (isValid) {
-      // AxiosApi.post("auth/login", details)
-      //   .then(response => {
-      //     let res = Etc.convertToString(response);
-      //     localStorage.setItem("userToken", res.data.token);
-      //     localStorage.setItem("auth", res.data.auth);
-      //     this.props.history.push("/home");
-      //   })
-      //   .catch(error => {
-      //     if (error) {
-      //       alert("Sorry your login details are not correct");
-      //     }
-      //   });
       this.props.loginUser(details, this.props.history);
       this.setState(initialState);
     }
   };
 
-  render() {
+  render() { 
     return (
       <div className="default-bg login-block">
         <div className="container block__container">
@@ -128,7 +126,7 @@ class LoginComponent extends Component {
                     type="submit"
                     className="btn btn-danger form-control btn-login"
                   >
-                    {" "}
+                    {""}
                     Login
                   </button>
                 </div>
@@ -162,5 +160,10 @@ class LoginComponent extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    errorMsg: state
+  };
+};
 
-export default connect(null, mapDispatchToProps)(LoginComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
