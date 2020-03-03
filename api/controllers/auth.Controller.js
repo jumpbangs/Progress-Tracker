@@ -28,7 +28,7 @@ class AuthController {
             if (!isPasswordValid) {
                 return next({
                     status:401,
-                    msg: 'Sorry, Invalid User'
+                    msg: 'Sorry, Username or Password is Invalid'
                 });
             } else {
                 let token = jwtToken.generateToken(result.dataValues.ID, 'lol');

@@ -9,7 +9,6 @@ class Header extends Component {
         this.props.history.push('/');
     };
 
-
     render() {
         return (
             <div>
@@ -21,7 +20,7 @@ class Header extends Component {
                         <div className="nav navbar-nav navbar-right">
                             <a onClick={this.onSignOut} className='nav-item nav-link sign-out'>
                                 <i className="fas fa-sign-out-alt" />
-                                Login
+                                Logout
                             </a>
                         </div>
                     </div>

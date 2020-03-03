@@ -1,12 +1,42 @@
 import {
-    AUTH_ERR_LOGIN,
+    AUTH_LOGIN_ERR,
+    AUTH_LOGIN_SUCCESS,
+    AUTH_REGISTER_FAIL,
+    AUTH_REGISTER_SUCCESS,
 } from "../actions/auth.Actions";
 
-export default function authReducer(state=[], action) {
-    switch (action.type) {
-        case AUTH_ERR_LOGIN:
-            return [...state, action.payload];        
+const defaultState = {
+    data:[],
+    err: null,
+    success: null
+}
 
+export default function authReducer(state = defaultState, action) {
+    console.log(action.type);
+    switch (action.type) {
+        case AUTH_LOGIN_ERR:
+            return {
+                ...state,
+                err: action.payload.error
+            };      
+        case AUTH_LOGIN_SUCCESS:
+            return {
+                ...state,
+                err: null,
+                success: action.payload.success
+            }
+        case AUTH_REGISTER_SUCCESS:
+            return {
+                ...state,
+                err:null,
+                success: action.payload.success
+            }
+        case AUTH_REGISTER_FAIL:
+            return {
+                ...state,
+                err: action.payload.error
+            }           
+       
         default:
             return state;
     }

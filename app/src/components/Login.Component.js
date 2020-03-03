@@ -28,23 +28,24 @@ const mapDispatchToProps = dispatch => {
 class LoginComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      username: "",
-      password: "",
-      userErr: " ",
-      passErr: " ",
-      authFailed: this.props.errorMsg
-    };
+    this.state = initialState;
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentDidUpdate() {
-    let errArray = this.props.errorMsg.auth;
-    if(Object.keys(errArray).length > 0){
-      alert(errArray[0].err.msg)
+  static getDerivedStateFromProps(props){
+    if(props.errorMsg.auth.err){
+      alert(props.errorMsg.auth.err);
+      props.errorMsg.auth.err = null;
     }
 
+    if(props.errorMsg.auth.success){
+      let res = props.errorMsg.auth.success;
+      localStorage.setItem("userToken", res.token);
+      localStorage.setItem("auth", res.auth);
+      props.history.push("/home");
+      props.errorMsg.auth.success = null;
+    }
   }
 
   onChange = event => {
@@ -72,9 +73,7 @@ class LoginComponent extends Component {
       Password: this.state.password
     };
 
-    console.log(isValid);
     if (isValid) {
-      console.log('lol');
       this.props.loginUser(details, this.props.history);
       this.setState(initialState);
     }

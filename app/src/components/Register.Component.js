@@ -1,19 +1,28 @@
 import React, { Component } from "react";
 
-import AxiosApi from "../utils/axios.config";
+import { connect } from "react-redux";
+import { registerUser } from "../actions/auth.Actions";
+import etc from "../utils/etc";
 
 const initialState = {
   name: "",
   username: "",
   password: "",
-  email: ""
+  email: "",
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    registerUser: (data, history) => {
+      dispatch(registerUser(data, history));
+    }
+  };
 };
 
 class RegisterComponent extends Component {
   constructor(props) {
     super(props);
     this.state = initialState;
-
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -23,6 +32,20 @@ class RegisterComponent extends Component {
       [event.target.name]: event.target.value
     });
   };
+
+
+  static getDerivedStateFromProps(props){
+
+    if(props.errorMsg.auth.err){
+      alert(props.errorMsg.auth.err);
+      props.errorMsg.auth.err = null;
+    }
+
+    if (props.errorMsg.auth.success){
+      alert(props.errorMsg.auth.success);
+      props.history.push('/');
+    }
+  }
 
   onSubmit = event => {
     event.preventDefault();
@@ -34,20 +57,15 @@ class RegisterComponent extends Component {
       Email: this.state.email
     };
 
-    AxiosApi.post("auth/register", registerDetails)
-      .then(response => {
-        this.props.history.push("/");
-        alert(response.data.msg);
-      })
-      .catch(error => {
-        if (error) {
-          alert(error.response.data.err.msg);
-        }
-        this.setState(initialState);
-      });
+    this.props.registerUser(registerDetails, this.props.history);
+    
+    this.setState(initialState);
   };
 
+
   render() {
+
+
     return (
       <div className="default-bg register-block">
         <div className="container block__container">
@@ -116,4 +134,10 @@ class RegisterComponent extends Component {
   }
 }
 
-export default RegisterComponent;
+const mapStateToProps = state => {
+  return {
+    errorMsg: state
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterComponent);
