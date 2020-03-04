@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { registerUser } from "../actions/auth.Actions";
-import etc from "../utils/etc";
 
 const initialState = {
   name: "",
