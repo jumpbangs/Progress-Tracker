@@ -12,11 +12,11 @@
     box-shadow:15px 20px 0px rgba(0,0,0,0.1);
 }
 
-.block__section h2, p{
+.block__section h1, h2, p{
     text-align: center;
 }
 
-.block__section h2:after{
+.block__section h1:after{
     content:" ";
     width:100px;
     height:5px;
@@ -32,15 +32,15 @@
     padding: 50px 30px;
 }
 
-/*
-    LoginComponent
- */
-
-.login-block {
+.basic-block {
     height: 100vh;
     overflow: auto;
     padding: 50px 0;
 }
+
+/*
+    LoginComponent
+ */
 
 .login-form {
     padding: 10px;
@@ -77,12 +77,6 @@
     RegisterComponent Block
  */
 
-.register-block{
-    height: 100vh;
-    overflow: auto;
-    padding: 60px 0;
-}
-
 .register-form {
     padding: 30px 0;
     text-align: center;
@@ -112,8 +106,6 @@
 .nav-icon i{
     padding: 5px;
 }
-
-
 
 /*
     Forget Pass Page
