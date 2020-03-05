@@ -81,11 +81,11 @@ class LoginComponent extends Component {
 
   render() { 
     return (
-      <div className="default-bg login-block">
+      <div className="default-bg basic-block">
         <div className="container block__container">
           <div className="row">
-            <div className="col-md-4 block__section">
-              <h2>Hi</h2>
+            <div className="col-md-5 block__section">
+              <h1>Login</h1>
               <form onSubmit={this.onSubmit} className="login-form">
                 <div className="form-group">
                   <input
@@ -118,18 +118,18 @@ class LoginComponent extends Component {
                     Login
                   </button>
                 </div>
-                <div className="row">
-                  <Link className="col-md-7" to="/register">
-                    Create a new account
+                <div className="row pt-2">
+                  <Link className="col-lg-7" to="/register">
+                    Create new account
                   </Link>
-                  <Link className="col-md-5" to="/forgetpass">
+                  <Link className="col-lg-5" to="/forgetpass">
                     Forget password
                   </Link>
                 </div>
               </form>
             </div>
 
-            <div className="col-md-8 login-block-side">
+            <div className="col-md-7 login-block-side">
               <div className="login-block-side__img-block">
                 <img
                   src={logo}

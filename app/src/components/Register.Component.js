@@ -66,11 +66,11 @@ class RegisterComponent extends Component {
 
 
     return (
-      <div className="default-bg register-block">
+      <div className="default-bg basic-block">
         <div className="container block__container">
           <div className="row">
             <div className="col block__section">
-              <h2>Register</h2>
+              <h1>Register</h1>
               <p>Fill in your details to register</p>
 
               <form onSubmit={this.onSubmit} className="register-form">

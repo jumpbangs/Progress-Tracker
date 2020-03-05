@@ -45,11 +45,11 @@ export class ForgetPassComponent extends Component {
 
   render() {
     return (
-      <div className="default-bg forgetpass-block">
+      <div className="default-bg basic-block">
         <div className="container block__container">
           <div className="row">
             <div className="col block__section">
-              <h2>Forget your password ??</h2>
+              <h1>Reset your password</h1>
 
               <form onSubmit={this.onSubmit} className="register-form">
                 <div className="form-group">

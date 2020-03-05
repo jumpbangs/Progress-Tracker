@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Sidebar from "./Layouts/Sidebar";
 import Header from "./Layouts/Header";
 
 export class ProfileComponent extends Component {
