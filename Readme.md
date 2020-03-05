@@ -12,10 +12,11 @@ project
 |-- controller
 |    |-- auth.Controller.js
 |    |-- db.Controller.js
-|    |-- userRoute.js
+|    |-- user.Controller.js
 |
 |-- model
-|    |--auth.Model.js
+|    |-- auth.Model.js
+|    |-- user.Model.js
 |
 |-- route
 |    |-- auth.Route.js
@@ -24,11 +25,13 @@ project
 |    |-- bcrypt.Utils.js
 |    |-- joi.Validator.js
 |    |-- jwt.Utils.js
+|    |-- mail.Utils.js
 |
 |-- index.js
 |-- package.json
 |-- package-lock.json
-
+|-- Dockerfile
+|-- fabfile.py
 ```
 The folder structure is structed according to what each files are used for and filed according to thier defition or function. 
 
@@ -46,13 +49,14 @@ These are the following Node Modules that is being used in the project.
 * sequelize
 * bcryptjs
 * jsonwebtoken
-* cors
+* cors 
 ```
 
 ## Todo
 - [x] Register User
 - [X] Token Generation for User
 - [X] Login Validation User
+- [X] User Reset via Email
 - [ ] Fetch User Info
 - [ ] User Level Clearance
 - [ ] Setup Profile Page
