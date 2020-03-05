@@ -34,8 +34,16 @@ class Header extends Component {
             <ul className="navbar-nav mr-auto">
               <Sidebar />
             </ul>
+            <div className="my-2 my-lg-0">
+            <button onClick={this.onSignOut} className="btn btn-outline-light sign-out">
+              <i className="fas fa-sign-out-alt" />
+              Logout
+            </button>
           </div>
+          </div>
+
         </nav>
+
       </div>
     );
   }
