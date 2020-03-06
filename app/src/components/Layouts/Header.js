@@ -1,14 +1,38 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/auth.Actions";
 import Sidebar from "./Sidebar";
 
+const mapDispatchToProps = dispatch => {
+  return {
+    logoutUser: (data, history) => {
+      dispatch(logoutUser(data, history));
+    }
+  };
+};
 class Header extends Component {
   onSignOut = event => {
     event.preventDefault();
-    localStorage.removeItem("userToken");
-    localStorage.removeItem("auth");
-    this.props.history.push("/");
+    let tokenData = {
+      token: localStorage.getItem("userToken")
+    };
+
+    this.props.logoutUser(tokenData, this.props.history);
   };
+
+  static getDerivedStateFromProps(props) {
+    if (props.errorMsg.auth.err) {
+      console.log(props.errorMsg.auth.err);
+    }
+
+    if (props.errorMsg.auth.success) {
+      localStorage.removeItem("userToken");
+      localStorage.removeItem("auth");
+      props.history.push("/");
+      props.errorMsg.auth.success = null;
+    }
+  }
 
   render() {
     return (
@@ -35,18 +59,25 @@ class Header extends Component {
               <Sidebar />
             </ul>
             <div className="my-2 my-lg-0">
-            <button onClick={this.onSignOut} className="btn btn-outline-light sign-out">
-              <i className="fas fa-sign-out-alt" />
-              Logout
-            </button>
+              <button
+                onClick={this.onSignOut}
+                className="btn btn-outline-light sign-out"
+              >
+                <i className="fas fa-sign-out-alt" />
+                Logout
+              </button>
+            </div>
           </div>
-          </div>
-
         </nav>
-
       </div>
     );
   }
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    errorMsg: state
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

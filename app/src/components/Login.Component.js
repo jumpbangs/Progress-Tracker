@@ -3,7 +3,7 @@ import React, { Component } from "react";
 //Logo
 import logo from "../assets/img/logo.png";
 
-import etc from '../utils/etc'
+import etc from "../utils/etc";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -33,13 +33,13 @@ class LoginComponent extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  static getDerivedStateFromProps(props){
-    if(props.errorMsg.auth.err){
+  static getDerivedStateFromProps(props) {
+    if (props.errorMsg.auth.err) {
       alert(props.errorMsg.auth.err);
       props.errorMsg.auth.err = null;
     }
 
-    if(props.errorMsg.auth.success){
+    if (props.errorMsg.auth.success) {
       let res = props.errorMsg.auth.success;
       localStorage.setItem("userToken", res.token);
       localStorage.setItem("auth", res.auth);
@@ -53,7 +53,6 @@ class LoginComponent extends Component {
   };
 
   validator = () => {
-
     if (etc.isObjEmpty(this.state.username)) {
       alert("Username is empty");
       return false;
@@ -79,7 +78,7 @@ class LoginComponent extends Component {
     }
   };
 
-  render() { 
+  render() {
     return (
       <div className="default-bg basic-block">
         <div className="container block__container">

@@ -46,6 +46,14 @@ class UserContoller {
         })
     };
 
+    fetchUser = (request , response, next) => {
+        console.log(request.headers);
+        response.json({
+            msg : 'Fetched User Details'
+        })
+    }
+    
+
 }
 
 module.exports = new UserContoller();

@@ -33,14 +33,15 @@
 }
 
 .basic-block {
-    height: 100vh;
+    min-height: 100vh;
     overflow: auto;
     padding: 50px 0;
 }
 
 .basic-block__withNav {
-    height: 94vh;
-    overflow: auto;
+    min-height: 94.2vh;
+    height: 100%;
+    overflow: hidden;
     padding: 50px 0;
 }
 
@@ -128,6 +129,7 @@
     Profile Page
 */
 .profilePage__block {
+    position: relative;
     background-image: linear-gradient(to bottom, #3e5151, #29675b, #227b54, #3f8d3d, #6e9b0a);
 }
 

@@ -19,6 +19,8 @@ class userModel {
           }
       });
   }
+
+
 }
 
 module.exports = new userModel();
