@@ -6,6 +6,8 @@ export const AUTH_LOGIN_SUCCESS = "AUTH_LOGIN_SUCCESS";
 export const AUTH_REGISTER_SUCCESS = "AUTH_REGISTER_SUCCESS";
 export const AUTH_REGISTER_FAIL = "AUTH_REGISTER_FAIL";
 
+export const AUTH_LOGOUT_SUCCESS = "AUTH_LOGOUT_SUCCESS";
+export const AUTH_LOGOUT_ERR = "AUTH_LOGOUT_ERR";
 
 
 export const loginUser = (data) => {
@@ -56,6 +58,34 @@ const userRegister = (success) => ({
 const userRegisterFail = (error) => ({
   type: AUTH_REGISTER_FAIL,
   payload: {
+    error
+  }
+});
+
+
+export const logoutUser = (data, history) =>{
+  return async (dispatch) =>{
+    try {
+      let response = await AxiosApi.post('/auth/logout', data);
+      dispatch(userLogout(response.data.msg));
+    }
+    catch(error){
+      console.log(error);
+      dispatch(userLogoutFail(error.response.data.err.msg));
+    }
+  }
+};
+
+const userLogout = (success) =>({
+  type: AUTH_LOGIN_SUCCESS,
+  payload:{
+    success
+  }
+});
+
+const userLogoutFail = (error) =>({
+  type: AUTH_LOGOUT_ERR,
+  payload:{
     error
   }
 })

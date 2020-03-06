@@ -11,4 +11,7 @@ ROUTER.route('/login')
 ROUTER.route('/register')
     .post(authControl.authRegister);
 
+ROUTER.route('/logout')
+    .post(authControl.authLogout);
+
 module.exports = ROUTER;

@@ -1,70 +1,78 @@
-const DbConfig = require('../config/database');
-const { Sequelize } = require('sequelize');
-
+const DbConfig = require("../config/database");
+const { Sequelize } = require("sequelize");
 
 const mysqlDb = new Sequelize(
-    DbConfig.database,
-    DbConfig.admin,
-    DbConfig.password, {
-        host: DbConfig.host,
-        dialect: DbConfig.dialect,
-        logging : false
-    }
+  DbConfig.database,
+  DbConfig.admin,
+  DbConfig.password,
+  {
+    host: DbConfig.host,
+    dialect: DbConfig.dialect,
+    logging: false
+  }
 );
 
-let User = mysqlDb.define('users', {
-        ID:{
-            type: Sequelize.INTEGER.UNSIGNED,
-            primaryKey : true,
-            autoIncrement: true
-        },
+let User = mysqlDb.define("users", {
+  ID: {
+    type: Sequelize.INTEGER.UNSIGNED,
+    primaryKey: true,
+    autoIncrement: true
+  },
 
-        Name :{
-            type: Sequelize.STRING
-        },
+  Name: {
+    type: Sequelize.STRING
+  },
 
-        UserName :{
-            type: Sequelize.STRING,
-        },
+  UserName: {
+    type: Sequelize.STRING
+  },
 
-        Password : {
-            type: Sequelize.STRING,
-        },
+  Password: {
+    type: Sequelize.STRING
+  },
 
-        Email: {
-            type : Sequelize.STRING,
-        }
-
+  Email: {
+    type: Sequelize.STRING
+  }
 });
 
-let UserProfile = mysqlDb.define('userProfile', {
-    ID:{
-        type: Sequelize.INTEGER.UNSIGNED,
-        primaryKey : true,
-    },
+let UserProfile = mysqlDb.define("userProfile", {
+  ID: {
+    type: Sequelize.INTEGER.UNSIGNED,
+    primaryKey: true
+  },
 
-    LastName : {
-        type: Sequelize.STRING,
-        allowNull : true
-    },
+  LastName: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
 
-    Phone : {
-        type: Sequelize.STRING(10),
-        allowNull: true
-    },
+  Phone: {
+    type: Sequelize.STRING(10),
+    allowNull: true
+  },
 
-    Address : {
-        type: Sequelize.STRING,
-        allowNull: true
-    }
-
+  Address: {
+    type: Sequelize.STRING,
+    allowNull: true
+  }
 });
 
-
+let UserToken = mysqlDb.define("userToken", {
+  UserName: {
+    type: Sequelize.STRING,
+    primaryKey: true,
+    allowNull: false
+  },
+  GeneratedUserToken: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
 
 /**
  * create table if not exist
  */
-mysqlDb.sync({force:false});
+mysqlDb.sync({ force: false });
 
-module.exports = {User, UserProfile};
+module.exports = { User, UserProfile, UserToken };

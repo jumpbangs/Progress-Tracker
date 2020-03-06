@@ -1,4 +1,4 @@
-const {User, UserProfile }= require('../controllers/db.Controller');
+const {User, UserProfile,UserToken }= require('../controllers/db.Controller');
 
 class authModel {
 
@@ -23,6 +23,32 @@ class authModel {
         return User.findOne({
             where: {
                 UserName : data.UserName
+            }
+        });
+    };
+
+    storeUserToken = (data, token) => {
+        return UserToken.findOne({
+            where:{
+                UserName : data.UserName
+            }
+        }).then((user) =>{
+            if(user){
+                return user.update({
+                    GeneratedUserToken: token
+                });
+            }
+            return UserToken.create({
+                UserName : data.UserName,
+                GeneratedUserToken: token
+            });
+        })
+    };
+
+    deleteStoredToken = (data) =>{
+        return UserToken.destroy({
+            where:{
+                GeneratedUserToken: data.token
             }
         });
     }
