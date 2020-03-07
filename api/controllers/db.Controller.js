@@ -13,12 +13,12 @@ const mysqlDb = new Sequelize(
 );
 
 let User = mysqlDb.define("users", {
-  ID: {
-    type: Sequelize.INTEGER.UNSIGNED,
+  id:{
+    allowNull: false,
+    autoIncrement: true,
     primaryKey: true,
-    autoIncrement: true
+    type:Sequelize.INTEGER
   },
-
   Name: {
     type: Sequelize.STRING
   },
@@ -37,11 +37,12 @@ let User = mysqlDb.define("users", {
 });
 
 let UserProfile = mysqlDb.define("userProfile", {
-  ID: {
-    type: Sequelize.INTEGER.UNSIGNED,
-    primaryKey: true
+  userId:{
+    allowNull:false,
+    autoIncrement: true,
+    primaryKey:true,
+    type:Sequelize.INTEGER
   },
-
   LastName: {
     type: Sequelize.STRING,
     allowNull: true
@@ -59,9 +60,14 @@ let UserProfile = mysqlDb.define("userProfile", {
 });
 
 let UserToken = mysqlDb.define("userToken", {
+  userIdToken:{
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    primaryKey:true
+  },
   UserName: {
     type: Sequelize.STRING,
-    primaryKey: true,
     allowNull: false
   },
   GeneratedUserToken: {
@@ -69,6 +75,8 @@ let UserToken = mysqlDb.define("userToken", {
     allowNull: false
   }
 });
+
+User.hasOne(UserProfile, {foreignKey:'userId'});
 
 /**
  * create table if not exist

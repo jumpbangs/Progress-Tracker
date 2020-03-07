@@ -14,7 +14,6 @@ const defaultState = {
 };
 
 export default function authReducer(state = defaultState, action) {
-  console.log(action.type);
   switch (action.type) {
     case AUTH_LOGIN_ERR:
       return {

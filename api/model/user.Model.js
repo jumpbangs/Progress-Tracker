@@ -1,4 +1,4 @@
-const { User, UserProfile } = require("../controllers/db.Controller");
+const { User, UserProfile, UserToken } = require("../controllers/db.Controller");
 
 class userModel {
 
@@ -10,7 +10,6 @@ class userModel {
     })
   };
 
-
   resetUserPassword = (data, newPass) => {
       return User.update( newPass, {
           where:{
@@ -18,7 +17,25 @@ class userModel {
               UserName: data.UserName
           }
       });
-  }
+  };
+
+  findUserByToken = (data) => {
+    return UserToken.findOne({
+      where:{
+        GeneratedUserToken: data.token
+      }
+    }).then(user =>{
+      User.find({
+        where:{
+          ID: user.dataValues.UserId
+        },
+        include:[{
+          model:UserProfile,
+          as:'Profile'
+        }]
+      }).then(foundUser => {return foundUser});
+    })
+  };
 
 
 }

@@ -1,58 +1,67 @@
-const {User, UserProfile,UserToken }= require('../controllers/db.Controller');
+const {
+  User,
+  UserProfile,
+  UserToken
+} = require("../controllers/db.Controller");
 
 class authModel {
+  addUserQuery = data => {
+    return User.findOrCreate({
+      where: {
+        UserName: data.UserName,
+        Email: data.Email
+      },
+      defaults: data
+    });
+  };
 
-    addUserQuery = (data) => {
-        // return  User.create(data);
-        return User.findOrCreate({
-            where: {
-                UserName: data.UserName,
-                Email: data.Email
-            },
-            defaults: data
+  addUserQueryWithProfile = data => {
+    return UserProfile.create({
+        User_Id: data
+    });
+  };
+
+  userLoggingIn = data => {
+    return User.findOne({
+      where: {
+        UserName: data.UserName
+      }
+    });
+  };
+
+  storeUserToken = (data, token) => {
+    let user_id = User.findOne({
+      where: {
+        UserName: data.UserName
+      }
+    });
+    return UserToken.findOne({
+      where: {
+        UserName: data.UserName
+      }
+    }).then(result => {
+      if (result) {
+        return result.update({
+          GeneratedUserToken: token
         });
-    };
-
-    addUserQueryWithProfile = (data) => {
-        return UserProfile.create({
-            ID : data
-        })
-    };
-
-    userLoggingIn = (data) => {
-        return User.findOne({
-            where: {
-                UserName : data.UserName
-            }
+      }
+      user_id.then(result => {
+        return UserToken.create({
+          UserId: result.dataValues.id,
+          UserName: data.UserName,
+          GeneratedUserToken: token
         });
-    };
+      });
+    });
+  };
 
-    storeUserToken = (data, token) => {
-        return UserToken.findOne({
-            where:{
-                UserName : data.UserName
-            }
-        }).then((user) =>{
-            if(user){
-                return user.update({
-                    GeneratedUserToken: token
-                });
-            }
-            return UserToken.create({
-                UserName : data.UserName,
-                GeneratedUserToken: token
-            });
-        })
-    };
-
-    deleteStoredToken = (data) =>{
-        return UserToken.destroy({
-            where:{
-                GeneratedUserToken: data.token
-            }
-        });
-    }
-
+  deleteStoredToken = data => {
+    return UserToken.destroy({
+      where: {
+        GeneratedUserToken: data.token
+      }
+    });
+  };
 }
 
 module.exports = new authModel();
