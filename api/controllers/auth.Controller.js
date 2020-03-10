@@ -30,9 +30,9 @@ class AuthController {
             msg: "Sorry, Username or Password is Invalid"
           });
         } else {
-          let token = jwtToken.generateToken(result.dataValues.ID, "lol");
-          console.log(request.body, token);
+          let token = jwtToken.generateToken(result.dataValues.id, "lol");
           AUTHMODEL.storeUserToken(request.body, token).then(result => {
+            // console.log(result);
             response.status(200).send({
               auth: true,
               token: token
@@ -59,7 +59,7 @@ class AuthController {
     } else {
       AUTHMODEL.addUserQuery(value)
         .then(value => {
-          let userID = value[0].dataValues.ID;
+          let userID = value[0].dataValues.id;
           let userName = value[0].dataValues.UserName;
           AUTHMODEL.addUserQueryWithProfile(userID)
             .then(result => {
