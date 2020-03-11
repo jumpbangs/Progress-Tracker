@@ -68,7 +68,6 @@ let UserToken = mysqlDb.define("userToken", {
     type: Sequelize.INTEGER,
     primaryKey: true,
     allowNull: false,
-    primaryKey:true
   },
   UserName: {
     type: Sequelize.STRING,

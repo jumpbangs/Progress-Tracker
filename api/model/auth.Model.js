@@ -34,7 +34,6 @@ class authModel {
   };
 
   storeUserToken = (data, token) => {
-
     let user_id = User.findOne({
       where: {
         UserName: data.UserName
@@ -46,6 +45,7 @@ class authModel {
       }
 
     }).then(result => {
+      
       if (result) {
         return result.update({
           GeneratedUserToken: token
@@ -53,7 +53,7 @@ class authModel {
       }
       user_id.then(result => {
         return UserToken.create({
-          UserId: result.dataValues.id,
+          userIdToken: result.dataValues.Id,
           UserName: data.UserName,
           GeneratedUserToken: token
         });
