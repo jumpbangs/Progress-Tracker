@@ -1,7 +1,7 @@
 const AUTHMODEL = require("../model/auth.Model");
 const bcryptUtils = require("../utils/bcrypt.Utils");
 const jwtToken = require("../utils/jwt.Utils");
-const joiValidator = require("../utils/joi.Validator");
+const joiValidator = require("../validators/joi.Validator");
 
 class AuthController {
   authBase = (request, response, next) => {
@@ -30,8 +30,7 @@ class AuthController {
             msg: "Sorry, Username or Password is Invalid"
           });
         } else {
-          let token = jwtToken.generateToken(result.dataValues.ID, "lol");
-          console.log(request.body, token);
+          let token = jwtToken.generateToken(result.dataValues.Id, "lol");
           AUTHMODEL.storeUserToken(request.body, token).then(result => {
             response.status(200).send({
               auth: true,
@@ -47,7 +46,7 @@ class AuthController {
         //         msg: err
         //     });
         // }
-        console.log(err);
+        console.log('Logging err', err);
       });
   };
 
@@ -65,7 +64,7 @@ class AuthController {
             AUTHMODEL.addUserQueryWithProfile(userID)
               .then(result => {
                 response.json({
-                  msg: userName + ' registered'
+                  msg: userName + ' registered successfully'
                 })
 
               })
