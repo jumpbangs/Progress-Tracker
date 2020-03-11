@@ -71,7 +71,6 @@ export const logoutUser = (data, history) =>{
       dispatch(userLogout(response.data.msg));
     }
     catch(error){
-      console.log(error);
       dispatch(userLogoutFail(error.response.data.err.msg));
     }
   }
