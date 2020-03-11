@@ -59,28 +59,32 @@ class AuthController {
     } else {
       AUTHMODEL.addUserQuery(value)
         .then(value => {
-          let userID = value[0].dataValues.ID;
           let userName = value[0].dataValues.UserName;
-          AUTHMODEL.addUserQueryWithProfile(userID)
-            .then(result => {
-              response.json({
-                msg:
-                  userName +
-                  " is " +
-                  (value.isNewRecord ? "already" : "") +
-                  " Registered"
+          let userID = value[0].dataValues.Id;
+          if (!value.isNewRecord) {
+            AUTHMODEL.addUserQueryWithProfile(userID)
+              .then(result => {
+                response.json({
+                  msg: userName + ' registered'
+                })
+
+              })
+              .catch(err => {
+                if (err) {
+                  return next({
+                    status: 400,
+                    msg: err
+                  });
+                }
               });
+          } else {
+            response.json({
+              msg: userName + " is already registered"
             })
-            .catch(err => {
-              if (err) {
-                return next({
-                  status: 400,
-                  msg: err
-                });
-              }
-            });
+          }
         })
         .catch(err => {
+          console.log(err);
           if (err) {
             return next({
               status: 400,
