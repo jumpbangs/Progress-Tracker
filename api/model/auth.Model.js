@@ -16,8 +16,12 @@ class authModel {
   };
 
   addUserQueryWithProfile = data => {
-    return UserProfile.create({
-        User_Id: data
+
+    return UserProfile.findOrCreate({
+      where: {
+        userId: data,
+        id: data
+      }
     });
   };
 
@@ -30,6 +34,7 @@ class authModel {
   };
 
   storeUserToken = (data, token) => {
+
     let user_id = User.findOne({
       where: {
         UserName: data.UserName
@@ -39,6 +44,7 @@ class authModel {
       where: {
         UserName: data.UserName
       }
+
     }).then(result => {
       if (result) {
         return result.update({

@@ -1,7 +1,7 @@
 const AUTHMODEL = require("../model/auth.Model");
 const bcryptUtils = require("../utils/bcrypt.Utils");
 const jwtToken = require("../utils/jwt.Utils");
-const joiValidator = require("../utils/joi.Validator");
+const joiValidator = require("../validators/joi.Validator");
 
 class AuthController {
   authBase = (request, response, next) => {
@@ -30,7 +30,9 @@ class AuthController {
             msg: "Sorry, Username or Password is Invalid"
           });
         } else {
-          let token = jwtToken.generateToken(result.dataValues.id, "lol");
+          
+          let token = jwtToken.generateToken(result.dataValues.Id, "lol");
+
           AUTHMODEL.storeUserToken(request.body, token).then(result => {
             // console.log(result);
             response.status(200).send({
@@ -47,7 +49,7 @@ class AuthController {
         //         msg: err
         //     });
         // }
-        console.log(err);
+        console.log('Logging err', err);
       });
   };
 
@@ -59,28 +61,33 @@ class AuthController {
     } else {
       AUTHMODEL.addUserQuery(value)
         .then(value => {
-          let userID = value[0].dataValues.id;
+        
           let userName = value[0].dataValues.UserName;
-          AUTHMODEL.addUserQueryWithProfile(userID)
-            .then(result => {
-              response.json({
-                msg:
-                  userName +
-                  " is " +
-                  (value.isNewRecord ? "already" : "") +
-                  " Registered"
+          let userID = value[0].dataValues.Id;
+          if (!value.isNewRecord) {
+            AUTHMODEL.addUserQueryWithProfile(userID)
+              .then(result => {
+                response.json({
+                  msg: userName + ' registered successfully'
+                })
+
+              })
+              .catch(err => {
+                if (err) {
+                  return next({
+                    status: 400,
+                    msg: err
+                  });
+                }
               });
+          } else {
+            response.json({
+              msg: userName + " is already registered"
             })
-            .catch(err => {
-              if (err) {
-                return next({
-                  status: 400,
-                  msg: err
-                });
-              }
-            });
+          }
         })
         .catch(err => {
+          console.log(err);
           if (err) {
             return next({
               status: 400,

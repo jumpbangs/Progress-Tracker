@@ -13,9 +13,11 @@ const mysqlDb = new Sequelize(
 );
 
 let User = mysqlDb.define("users", {
-  id:{
+  Id: {
+    type: Sequelize.INTEGER.UNSIGNED,
     allowNull: false,
     autoIncrement: true,
+
     primaryKey: true,
     type:Sequelize.INTEGER
   },
@@ -37,12 +39,7 @@ let User = mysqlDb.define("users", {
 });
 
 let UserProfile = mysqlDb.define("userProfile", {
-  userId:{
-    allowNull:false,
-    autoIncrement: true,
-    primaryKey:true,
-    type:Sequelize.INTEGER
-  },
+  
   LastName: {
     type: Sequelize.STRING,
     allowNull: true
@@ -56,8 +53,15 @@ let UserProfile = mysqlDb.define("userProfile", {
   Address: {
     type: Sequelize.STRING,
     allowNull: true
+  },
+
+  State : {
+    type: Sequelize.STRING,
+    allowNull: true
   }
 });
+
+UserProfile.belongsTo(User);
 
 let UserToken = mysqlDb.define("userToken", {
   userIdToken:{
