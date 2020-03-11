@@ -129,8 +129,8 @@
     Profile Page
 */
 .profilePage__block {
-    position: relative;
-    background-image: linear-gradient(to bottom, #3e5151, #29675b, #227b54, #3f8d3d, #6e9b0a);
+    position: relative;    
+    background-image: linear-gradient(to right bottom, #d3fbd8, #a6d5c3, #83afab, #678a8e, #51666e, #45515a, #393e46, #2b2c31, #232226, #1b191b, #110f10, #000000);
 }
 
 .profileImage-card {

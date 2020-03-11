@@ -51,16 +51,25 @@ class UserContoller {
   fetchUser = (request, response, next) => {
     USERMODEL.findUserByToken(request.body)
       .then(result => {
-        console.log("User Controller", result);
-        // response.json({
-        //     msg : result
-        // })
+        let userId = result.dataValues.userIdToken
+        USERMODEL.getUserProfile(userId)
+        .then(result => {
+          response.json(result);
+        })
+        .catch(err =>{
+          if(err) {
+            return next({
+              status: 400,
+              msg: err
+            })
+          }
+        })
       })
       .catch(err => {
         if (err) {
           return next({
             status: 400,
-            msg: err
+            msg: 'User is not logged in'
           });
         }
       });
