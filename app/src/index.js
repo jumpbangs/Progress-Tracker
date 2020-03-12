@@ -16,7 +16,7 @@ import './style/Reset.css';
 
 
 const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
-const store = createStoreWithMiddleware(reducer)
+const store = createStoreWithMiddleware(reducer);
 
 
 ReactDOM.render(

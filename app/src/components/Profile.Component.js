@@ -18,13 +18,11 @@ export class ProfileComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
 
-  componentDidMount() {
     let userToken = localStorage.getItem("userToken");
     this.props.fetchUserDetails(userToken);
-  }
 
+  }
 
   static getDerivedStateFromProps(props){
     let results = props.errorMsg.user.success;
@@ -39,7 +37,7 @@ export class ProfileComponent extends Component {
 
 
   render() {
-    
+    console.log(this.props.errorMsg);
     let { Name, UserName, Email } = {...this.state.userDetails};
     let { LastName, Phone, Address } = {...this.state.otherDetails};
     return (
