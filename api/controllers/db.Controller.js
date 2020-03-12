@@ -62,6 +62,7 @@ let UserProfile = mysqlDb.define("userProfile", {
 });
 
 UserProfile.belongsTo(User);
+User.hasOne(UserProfile);
 
 let UserToken = mysqlDb.define("userToken", {
   userIdToken:{
