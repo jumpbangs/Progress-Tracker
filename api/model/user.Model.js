@@ -23,9 +23,10 @@ class userModel {
   };
 
   findUserByToken = data => {
+    console.log(data.usertoken);
     return UserToken.findOne({
       where: {
-        GeneratedUserToken: data.token
+        GeneratedUserToken: data.usertoken
       }
     });
   };

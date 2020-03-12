@@ -49,7 +49,7 @@ class UserContoller {
   };
 
   fetchUser = (request, response, next) => {
-    USERMODEL.findUserByToken(request.body)
+    USERMODEL.findUserByToken(request.headers)
       .then(result => {
         let userId = result.dataValues.userIdToken
         USERMODEL.getUserProfile(userId)
