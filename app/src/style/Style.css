@@ -139,3 +139,7 @@
     display: block;
     margin: 10px auto;
 }
+
+.btn-block {
+    display: inline-block;
+}

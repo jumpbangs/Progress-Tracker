@@ -43,21 +43,24 @@ export class ProfileComponent extends Component {
   }
 
   openModal = () => {
+
     this.setState({
       showModal: true
     });
   };
 
-  closeModal = () => {
+  closeModal = (e) => {
+    e.preventDefault();
     this.setState({
       showModal: false
     });
   };
 
+
   render() {
     // console.log(this.props.errorMsg);
-    // let { Name, UserName, Email } = {...this.state.userDetails};
-    // let { LastName, Phone, Address } = {...this.state.otherDetails};
+    let { Name, UserName, Email } = { ...this.state.userDetails };
+    let { LastName, Phone, Address } = { ...this.state.otherDetails };
     return (
       <div>
         <Header {...this.props} />
@@ -71,30 +74,25 @@ export class ProfileComponent extends Component {
                 alt="employee-image"
               />
               <div className="card-header pt-3 pb-3">
-                {/* <h3 className="card-title">{UserName}</h3> */}
-                <h3 className="card-title">Username</h3>
+                <h3 className="card-title">{UserName ? UserName : 'Update Username'}</h3>
               </div>
               <div className="card-body">
                 <ul className="list-group list-group-flush">
-                  {/* <li className="list-group-item">{Name}</li>
-                  <li className="list-group-item">{Email}</li>
-                  <li className="list-group-item">{LastName}</li>
-                  <li className="list-group-item">{Phone}</li>
-                  <li className="list-group-item">{Address}</li>                   */}
 
-                  <li className="list-group-item">Name</li>
-                  <li className="list-group-item">Email</li>
-                  <li className="list-group-item">LastName</li>
-                  <li className="list-group-item">Phone</li>
-                  <li className="list-group-item">Address</li>
+                  <li className="list-group-item">{Name ? Name : 'Update Name'}</li>
+                  <li className="list-group-item">{Email ? Email : 'Update Email'}</li>
+                  <li className="list-group-item">{LastName ? LastName : 'Update Lastname'}</li>
+                  <li className="list-group-item">{Phone ? Phone : 'Update Phone'}</li>
+                  <li className="list-group-item">{Address ? Address : 'Update Address'}</li>
                 </ul>
                 <div className="card-body">
-                  <a
+                  <button
                     className="btn btn-outline-success"
                     onClick={this.openModal}
                   >
                     Edit
-                  </a>
+                  </button>
+
                 </div>
               </div>
             </div>
@@ -106,7 +104,37 @@ export class ProfileComponent extends Component {
           contentLabel="Modal"
           ariaHideApp={false}
         >
-          <button onClick={this.closeModal}>Close Modal</button>
+          <form>
+            <div className="form-group">
+              <label htmlFor="inputName">Name</label>
+              <input type="email" className="form-control" id="inputName" placeholder="Enter Name" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="inputEmail">Email address</label>
+              <input type="email" className="form-control" id="inputEmail" placeholder="Enter email" />
+              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div className="form-group">
+              <label htmlFor="inputLastName">Last Name</label>
+              <input type="email" className="form-control" id="inputLastName" placeholder="Enter Name" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="inputPhone">Phone</label>
+              <input type="email" className="form-control" id="inputPhone" placeholder="Enter Name" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="inputAddress">Address</label>
+              <input type="email" className="form-control" id="inputAddress" placeholder="Enter Name" />
+            </div>
+            <div className="row">
+              <div className="col-sm-12 text-center">
+                <button className='btn btn-success btn-md btn-block center-block' onClick={this.closeModal}>Save</button>
+                <button className='btn btn-danger btn-md btn-block center-block' onClick={this.closeModal}>Cancel</button>
+              </div>
+            </div>
+
+          </form>
+
         </Modal>
       </div>
     );
