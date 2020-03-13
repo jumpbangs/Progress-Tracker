@@ -46,6 +46,8 @@ class LoginComponent extends Component {
       props.history.push("/home");
       props.errorMsg.auth.success = null;
     }
+
+    return null;
   }
 
   onChange = event => {

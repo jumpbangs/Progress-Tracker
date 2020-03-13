@@ -15,16 +15,28 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const initialState = {
+  name: "",
+  lastname: "",
+  email: "",
+  phone: "",
+  address: "",
+  showModal: false
+};
+
 export class ProfileComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showModal: false
-    };
+    this.state = initialState;
 
     //Modal Handler
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+
+    //Modal Form Handler
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
     // User Token
     let userToken = localStorage.getItem("userToken");
     this.props.fetchUserDetails(userToken);
@@ -42,20 +54,37 @@ export class ProfileComponent extends Component {
     }
   }
 
-  openModal = () => {
+  onChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
 
+  onSubmit = event => {
+    event.preventDefault();
+
+    const updateDetails = {
+      Name: this.state.name,
+      Email: this.state.email,
+      Address: this.state.address,
+      LastName: this.state.lastname,
+      Phone: this.state.phone
+    };
+
+    console.log(updateDetails);
+    this.setState(initialState)
+  };
+
+  openModal = () => {
     this.setState({
       showModal: true
     });
   };
 
-  closeModal = (e) => {
+  closeModal = e => {
     e.preventDefault();
-    this.setState({
-      showModal: false
-    });
+    this.setState(initialState);
   };
-
 
   render() {
     // console.log(this.props.errorMsg);
@@ -74,16 +103,27 @@ export class ProfileComponent extends Component {
                 alt="employee-image"
               />
               <div className="card-header pt-3 pb-3">
-                <h3 className="card-title">{UserName ? UserName : 'Update Username'}</h3>
+                <h3 className="card-title">
+                  {UserName ? UserName : "Update Username"}
+                </h3>
               </div>
               <div className="card-body">
                 <ul className="list-group list-group-flush">
-
-                  <li className="list-group-item">{Name ? Name : 'Update Name'}</li>
-                  <li className="list-group-item">{Email ? Email : 'Update Email'}</li>
-                  <li className="list-group-item">{LastName ? LastName : 'Update Lastname'}</li>
-                  <li className="list-group-item">{Phone ? Phone : 'Update Phone'}</li>
-                  <li className="list-group-item">{Address ? Address : 'Update Address'}</li>
+                  <li className="list-group-item">
+                    {Name ? Name : "Update Name"}
+                  </li>
+                  <li className="list-group-item">
+                    {Email ? Email : "Update Email"}
+                  </li>
+                  <li className="list-group-item">
+                    {LastName ? LastName : "Update Lastname"}
+                  </li>
+                  <li className="list-group-item">
+                    {Phone ? Phone : "Update Phone"}
+                  </li>
+                  <li className="list-group-item">
+                    {Address ? Address : "Update Address"}
+                  </li>
                 </ul>
                 <div className="card-body">
                   <button
@@ -92,7 +132,6 @@ export class ProfileComponent extends Component {
                   >
                     Edit
                   </button>
-
                 </div>
               </div>
             </div>
@@ -104,37 +143,87 @@ export class ProfileComponent extends Component {
           contentLabel="Modal"
           ariaHideApp={false}
         >
-          <form>
+          <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <label htmlFor="inputName">Name</label>
-              <input type="email" className="form-control" id="inputName" placeholder="Enter Name" />
+              <input
+                type="text"
+                className="form-control"
+                id="inputName"
+                name="name"
+                placeholder="Enter Name"
+                onChange={this.onChange}
+                value={this.state.name || ""}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="inputEmail">Email address</label>
-              <input type="email" className="form-control" id="inputEmail" placeholder="Enter email" />
-              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+              <input
+                type="email"
+                className="form-control"
+                id="inputEmail"
+                placeholder="Enter email"
+                name="email"
+                onChange={this.onChange}
+                value={this.state.email || ""}
+              />
+              <small id="emailHelp" className="form-text text-muted">
+                We'll never share your email with anyone else.
+              </small>
             </div>
             <div className="form-group">
               <label htmlFor="inputLastName">Last Name</label>
-              <input type="email" className="form-control" id="inputLastName" placeholder="Enter Name" />
+              <input
+                type="text"
+                className="form-control"
+                id="inputLastName"
+                placeholder="Enter Name"
+                name="lastname"
+                onChange={this.onChange}
+                value={this.state.lastname || ""}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="inputPhone">Phone</label>
-              <input type="email" className="form-control" id="inputPhone" placeholder="Enter Name" />
+              <input
+                type="text"
+                className="form-control"
+                id="inputPhone"
+                placeholder="Enter Name"
+                name="phone"
+                onChange={this.onChange}
+                value={this.state.phone || ""}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="inputAddress">Address</label>
-              <input type="email" className="form-control" id="inputAddress" placeholder="Enter Name" />
+              <input
+                type="text"
+                className="form-control"
+                id="inputAddress"
+                placeholder="Enter Name"
+                name="address"
+                onChange={this.onChange}
+                value={this.state.address || ""}
+              />
             </div>
             <div className="row">
               <div className="col-sm-12 text-center">
-                <button className='btn btn-success btn-md btn-block center-block' onClick={this.closeModal}>Save</button>
-                <button className='btn btn-danger btn-md btn-block center-block' onClick={this.closeModal}>Cancel</button>
+                <button
+                  className="btn btn-success btn-md btn-block center-block"
+                  type="submit"
+                >
+                  Save
+                </button>
+                <button
+                  className="btn btn-danger btn-md btn-block center-block"
+                  onClick={this.closeModal}
+                >
+                  Cancel
+                </button>
               </div>
             </div>
-
           </form>
-
         </Modal>
       </div>
     );
