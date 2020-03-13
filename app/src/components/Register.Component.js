@@ -44,6 +44,8 @@ class RegisterComponent extends Component {
       alert(props.errorMsg.auth.success);
       props.history.push('/');
     }
+
+    return null;
   }
 
   onSubmit = event => {

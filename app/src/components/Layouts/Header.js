@@ -25,13 +25,14 @@ class Header extends Component {
     if (props.errorMsg.auth.err) {
       console.log(props.errorMsg.auth.err);
     }
-
     if (props.errorMsg.auth.success) {
       localStorage.removeItem("userToken");
       localStorage.removeItem("auth");
       props.history.push("/");
       props.errorMsg.auth.success = null;
     }
+    
+    return null;
   }
 
   render() {
