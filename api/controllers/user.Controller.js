@@ -51,28 +51,38 @@ class UserContoller {
   fetchUser = (request, response, next) => {
     USERMODEL.findUserByToken(request.headers)
       .then(result => {
-        let userId = result.dataValues.userIdToken
+        let userId = result.dataValues.userIdToken;
         USERMODEL.getUserProfile(userId)
-        .then(result => {
-          response.json(result);
-        })
-        .catch(err =>{
-          if(err) {
-            return next({
-              status: 400,
-              msg: err
-            })
-          }
-        })
+          .then(result => {
+            response.json(result);
+          })
+          .catch(err => {
+            if (err) {
+              return next({
+                status: 400,
+                msg: err
+              });
+            }
+          });
       })
       .catch(err => {
         if (err) {
           return next({
             status: 400,
-            msg: 'User is not logged in'
+            msg: "User is not logged in"
           });
         }
       });
+  };
+
+  updateProfile = (request, response, next) => {
+    USERMODEL.findUserByToken(request.body).then(result => {
+      let userId = result.dataValues.userIdToken;
+      let update = USERMODEL.updateUserProfile(userId, request.body);
+      response.send({
+        msg:'Updated Success'
+      })      
+    });
   };
 }
 

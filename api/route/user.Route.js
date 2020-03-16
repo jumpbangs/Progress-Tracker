@@ -9,7 +9,8 @@ ROUTER.route('/resetpass')
     .post(userControl.resetPassword);
 
 ROUTER.route('/profile')
-    .get(userControl.fetchUser);
+    .get(userControl.fetchUser)
+    .post(userControl.updateProfile);
 
 
 module.exports = ROUTER;

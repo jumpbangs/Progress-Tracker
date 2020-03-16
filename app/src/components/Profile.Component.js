@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "./Layouts/Header";
 import Modal from "react-modal";
+import Etc from '../utils/etc';
 
-import { fetchUserDetails } from "../actions/user.Actions";
+import { fetchUserDetails, updateUserDetails } from "../actions/user.Actions";
 
 let defaultImage = require("../assets/img/Blank-Employee.jpg");
 
@@ -11,6 +12,9 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchUserDetails: data => {
       dispatch(fetchUserDetails(data));
+    },
+    updateUserDetails: (token, data) => {
+      dispatch(updateUserDetails(token, data));
     }
   };
 };
@@ -63,16 +67,20 @@ export class ProfileComponent extends Component {
   onSubmit = event => {
     event.preventDefault();
 
+    let { Name, Email } = { ...this.state.userDetails };
+    let { LastName, Phone, Address } = { ...this.state.otherDetails };
+
     const updateDetails = {
-      Name: this.state.name,
-      Email: this.state.email,
-      Address: this.state.address,
-      LastName: this.state.lastname,
-      Phone: this.state.phone
+      Name: Etc.updateChecker(Name, this.state.name),
+      Email: Etc.updateChecker(Email, this.state.email),
+      Address: Etc.updateChecker(Address ,this.state.address),
+      LastName: Etc.updateChecker(LastName,this.state.lastname),
+      Phone: Etc.updateChecker(Phone, this.state.phone),
+      usertoken: localStorage.getItem("userToken")
     };
 
-    console.log(updateDetails);
-    this.setState(initialState)
+    this.props.updateUserDetails(updateDetails);
+    this.setState(initialState);
   };
 
   openModal = () => {
@@ -87,7 +95,6 @@ export class ProfileComponent extends Component {
   };
 
   render() {
-    // console.log(this.props.errorMsg);
     let { Name, UserName, Email } = { ...this.state.userDetails };
     let { LastName, Phone, Address } = { ...this.state.otherDetails };
     return (

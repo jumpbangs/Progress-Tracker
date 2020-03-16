@@ -38,6 +38,35 @@ class userModel {
       include: [UserProfile]
     });
   };
+
+  updateUserProfile = (userId, data) => {
+    let userUpdate = User.update(
+      {
+        Name: data.Name,
+        Email: data.Email
+      },
+      {
+        where: {
+          Id: userId
+        }
+      }
+    );
+
+    let profileUpdate = UserProfile.update(
+      {
+        Address: data.Address,
+        LastName: data.LastName,
+        Phone: data.Phone
+      },
+      {
+        where: {
+          userId: userId
+        }
+      }
+    );
+
+    return { userUpdate, profileUpdate };
+  };
 }
 
 module.exports = new userModel();

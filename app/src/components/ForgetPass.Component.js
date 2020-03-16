@@ -26,7 +26,6 @@ export class ForgetPassComponent extends Component {
     const emailDetails = {
         Email:this.state.email
     };
-    console.log("send email");
     AxiosApi.post("user/resetpass", emailDetails)
       .then(response =>{
         this.props.history.push("/");
