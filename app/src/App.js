@@ -10,8 +10,9 @@ import {
 import LoginComponent from "./components/Login.Component";
 import RegisterComponent from "./components/Register.Component";
 import HomeComponent from "./components/Home.Component";
-import  ForgetPassComponent  from './components/ForgetPass.Component';
-import  ProfileComponent  from './components/Profile.Component';
+import ForgetPassComponent  from './components/ForgetPass.Component';
+import ProfileComponent  from './components/Profile.Component';
+import NotFoundComponent from './components/404.Component';
 
 const isLoggedIn = () => {
     return localStorage.getItem('userToken');
@@ -41,7 +42,8 @@ class App extends Component {
                     <Route exact path='/forgetpass' component={ForgetPassComponent}/>>
                     <Route exact path='/register' component={RegisterComponent}/>
                     <Route exact path='/home' component={EnhancedRoute}/>
-                    <Route path="/profile" component={EnhancedProfileRoute} />
+                    <Route path='/profile' component={EnhancedProfileRoute} />
+                    <Route path='*' component={NotFoundComponent} />
                 </Switch>
             </Router>
         )
