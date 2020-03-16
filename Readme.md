@@ -65,11 +65,11 @@ These are the following Node Modules that is being used in the project.
 - [X] Token Generation for User
 - [X] Login Validation User
 - [X] User Reset via Email
-- [ ] Fetch User Info
+- [X] Fetch User Info
 - [ ] User Level Clearance
-- [ ] Setup Profile Page
+- [X] Setup Profile Page
 - [ ] Add new post page
-
+- [ ] Realtionship tables
 ---
 
 ### Progess-Tracker App
