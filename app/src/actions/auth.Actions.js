@@ -16,7 +16,6 @@ export const loginUser = (data) => {
       let  response = await AxiosApi.post("/auth/login", data);
       dispatch(userLoginSuccess(response.data));
     } catch(error){
-      console.log(error.response);
         dispatch(userLoginFail(error.response.data.err.msg));
     }
   };
