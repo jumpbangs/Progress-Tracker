@@ -38,7 +38,7 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
           <Link to="/home" className="navbar-brand">
             Progress Tracker
           </Link>

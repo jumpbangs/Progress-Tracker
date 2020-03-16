@@ -117,19 +117,19 @@ export class ProfileComponent extends Component {
               <div className="card-body">
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item">
-                    {Name ? Name : "Update Name"}
+                    Name: {Name ? Name : "Update Name"}
                   </li>
                   <li className="list-group-item">
-                    {Email ? Email : "Update Email"}
+                    Email: {Email ? Email : "Update Email"}
                   </li>
                   <li className="list-group-item">
-                    {LastName ? LastName : "Update Lastname"}
+                    Lastname: {LastName ? LastName : "Update Lastname"}
                   </li>
                   <li className="list-group-item">
-                    {Phone ? Phone : "Update Phone"}
+                    Phone: {Phone ? Phone : "Update Phone"}
                   </li>
                   <li className="list-group-item">
-                    {Address ? Address : "Update Address"}
+                    Address: {Address ? Address : "Update Address"}
                   </li>
                 </ul>
                 <div className="card-body">
